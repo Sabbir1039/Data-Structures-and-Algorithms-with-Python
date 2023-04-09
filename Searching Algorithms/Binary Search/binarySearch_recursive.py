@@ -26,8 +26,8 @@ if __name__ == "__main__":
     end = len(arr)-1
 
     index = binarySearch(arr, start, end, value)
-    
+
     if(index == -1):
         print("Not found")
     else:
-        print("Found at index: ", index)    
+        print("Found at index: ", index) 
