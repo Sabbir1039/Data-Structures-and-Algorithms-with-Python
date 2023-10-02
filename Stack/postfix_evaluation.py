@@ -6,7 +6,8 @@ class PostFixEvaluation:
         self.operators = set(['+', '-', '*', '/', '^'])
     
     def perform_operation(self, op1, op2, char):
-        return (int(op1) + char + int(op2))
+        exp = f"{op1} {char} {op2}"
+        return eval(exp)
         
     def evaluate_postfix_exp(self, expression):
         for char in expression:
@@ -17,6 +18,11 @@ class PostFixEvaluation:
                 op1 = self.stack.pop()
                 res = self.perform_operation(op1, op2, char)
                 self.stack.append(res)
-
+        return self.stack[-1]
+    
 if __name__ == "__main__":
     expression = "2 3 * 5 4 * + 9 -"
+    
+    postfix = PostFixEvaluation()
+    result = postfix.evaluate_postfix_exp(expression)
+    print(result)
