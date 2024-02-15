@@ -1,6 +1,6 @@
 from collections import deque
 
-class InfixEvaluation:
+class prefixEvaluation:
 
     def __init__(self) -> None:
         self.stack = deque()
@@ -10,7 +10,7 @@ class InfixEvaluation:
         exp = f"{op1} {operator} {op2}"
         return eval(exp)
         
-    def infix_evaluation(self, expression):
+    def prefix_evaluation(self, expression):
         start = len(expression)-1   
         for i in range(start, -1, -1): # loop through expression in reverse
             if expression[i].isdigit():
@@ -25,6 +25,6 @@ class InfixEvaluation:
 if __name__ == "__main__":
     expression = "- + * 5 7 * 4 2 5"
     
-    infix = InfixEvaluation()
-    result = infix.infix_evaluation(expression)
+    prefix = prefixEvaluation()
+    result = prefix.prefix_evaluation(expression)
     print(result)

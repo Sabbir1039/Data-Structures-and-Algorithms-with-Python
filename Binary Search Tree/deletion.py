@@ -72,7 +72,7 @@ if __name__ == "__main__":
     root = insert(28, root)
     inorder(root)
     print()
-    delete(25, root)
+    delete(21, root)
     inorder(root)
     
    

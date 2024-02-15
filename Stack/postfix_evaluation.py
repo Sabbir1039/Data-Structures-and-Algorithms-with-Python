@@ -16,7 +16,7 @@ class PostFixEvaluation:
             elif char in self.operators:
                 op2 = self.stack.pop()
                 op1 = self.stack.pop()
-                res = self.perform_operation(op1, op2, char)                                       
+                res = self.perform_operation(op1, op2, char)                                    
                 self.stack.append(res)
         return self.stack[-1]
     
