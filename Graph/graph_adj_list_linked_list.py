@@ -1,4 +1,7 @@
-# Adjascency List using linked list representation in Python
+# Graph (undirected) Adjacency List using linked list representation in Python
+# space complexity of this implementation is O(V + E)
+# time complexity of add_edge() is O(1) and print_graph() is O(V+E)
+
 class AdjNode:
     def __init__(self, value) -> None:
         self.vertex = value
