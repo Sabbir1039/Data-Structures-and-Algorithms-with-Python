@@ -15,7 +15,7 @@ class Graph:
     # The time complexity for the BFS traversal itself is O(V + E)
     def bfs(self, source) -> None:
         que = []
-        visited = [False] * len(self.adj_list)
+        visited = [False] * (max(map(int, self.adj_list.keys())) + 1) # len(self.adj_list) will result error for higher vertex value
         que.append(source)
         visited[source] = True
         
@@ -36,8 +36,8 @@ if __name__ == "__main__":
     g.add_edge(0, 2)
     g.add_edge(1, 3)
     g.add_edge(2, 4)
-    g.add_edge(3, 5)
     g.add_edge(4, 5)
+    g.add_edge(3, 7)
     
     print(g.adj_list)
     g.bfs(0)
