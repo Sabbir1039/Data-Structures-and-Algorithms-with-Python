@@ -9,6 +9,7 @@ class Graph:
         self.graph[v].append(u)
     
     # time complexity of DFS in an undirected graph is O(V+E)
+    # DFS using recursion
     def dfs(self, source, visited=None):
         if visited is None:
             visited = []
@@ -20,6 +21,21 @@ class Graph:
             if neighbour not in visited:
                 self.dfs(neighbour, visited)
     
+    # DFS using stack
+    def dfs_stack(self, source):
+        visited = set()
+        stack = [source]
+        
+        while stack:
+            vertex = stack.pop()
+            if vertex not in visited:
+                print(vertex, end=" ")
+                visited.add(vertex)
+                
+                for neighbour in self.graph[vertex]:
+                    if neighbour not in visited:
+                        stack.append(neighbour)
+    
 if __name__ == "__main__":
     g = Graph()
     
@@ -30,6 +46,8 @@ if __name__ == "__main__":
     g.add_edge(4, 5)
     
     g.dfs(0)
+    print('\n')
+    g.dfs_stack(0)
     
 # Graph: 
 #        0
