@@ -1,48 +1,76 @@
-# Hash map collision handling with chaining method
-
 class Hashmap:
-    def __init__(self) -> None:
-        self.max_size = 10
-        self.arr = [[] for _ in range(self.max_size)]
+    def __init__(self, initial_capacity, threshold=0.75) -> None:
+        self.capacity = initial_capacity
+        self.threshold = threshold
+        self.size = 0
+        self.map = [[] for _ in range(self.capacity)]
         
-    def hash_key(self, key) -> int:
-        sum = 0
-        for ch in key:
-            sum += ord(ch)
-        return sum % self.max_size
+    def hash_function(self, key):
+        total = 0
+        for char in key:
+            total += ord(char)
+        return total%self.capacity
     
+    def resize(self, new_capacity):
+        old_map = self.map
+        self.capacity = new_capacity
+        self.size = 0
+        self.map = [[] for _ in range(self.capacity)]
+        
+        for entry in old_map:
+            for key, value in entry:
+                self.__setitem__(key, value)
+                
     def __setitem__(self, key, value):
-        index = self.hash_key(key)
+        if (self.size+1) / self.capacity > self.threshold:
+            self.resize(self.capacity * 2)
+        index = self.hash_function(key)
         found = False
         
-        for idx, item in enumerate(self.arr[index]):
-            if len(item) == 2 and item[0] == key:
-                self.arr[index][idx] = (key,value)
+        for idx, item in enumerate(self.map[index]):
+            if item[0] == key:
+                self.map[index][idx] = (key, value)
                 found = True
                 break
         if not found:
-            self.arr[index].append((key, value))
+            self.map[index].append((key, value))
+            self.size += 1
+        
             
     def __getitem__(self, key):
-        index = self.hash_key(key)
-        for item in self.arr[index]:
+        index = self.hash_function(key)
+        
+        for item in self.map[index]:
             if item[0] == key:
                 return item[1]
-            
+        raise KeyError
+    
     def __delitem__(self, key):
-        index = self.hash_key(key)
+        index = self.hash_function(key)
         
-        for idx, item in enumerate(self.arr[index]):
+        for idx, item in enumerate(self.map[index]):
             if item[0] == key:
-                del self.arr[index][idx]
-
-
+                del self.map[index][idx]
+                return
+        raise KeyError
+                
 if __name__ == "__main__":
-    map = Hashmap()
-    map['march 6'] = 27
-    map['march 6'] = 29
-    map['march 17'] = 28
     
-    print(map.arr)
+    hash = Hashmap(10)
     
+    hash['march 1'] = 0
+    hash['march 3'] = 10
+    hash['march 6'] = 20
+    hash['march 9'] = 30
+    hash['march 12'] = 40
+    hash['march 14'] = 50
+    hash['march 17'] = 60
+    hash['march 20'] = 70
+    hash['march 23'] = 80
+    hash['march 26'] = 90
     
+    print(hash.map)
+    
+    print(hash.size)
+    
+    print(hash['march 17'])

@@ -19,7 +19,7 @@ class Hashmap:
         
         for entry in old_map:
             if entry is not None:
-                self[entry[0]] = entry[1]
+                self[entry[0]] = entry[1] # like hash[entry[0]] = entry[1]
         
     def __setitem__(self, key, value):
         if (self.size + 1)/self.capacity > self.threshold:
