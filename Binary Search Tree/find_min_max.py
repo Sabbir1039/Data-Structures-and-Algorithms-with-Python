@@ -37,7 +37,7 @@ def findMin(root):
     elif(root.left == None):
         return root.data
     else:
-        return findMin(root.left)  
+        return findMin(root.left)
     
 # iterative function for finding min value
 def findMinIterative(root):
