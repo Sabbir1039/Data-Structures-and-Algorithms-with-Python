@@ -1,5 +1,4 @@
 *.log
 temp/
-/test.py
 test.py
-./Graph/test.py
+**/test.py
